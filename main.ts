@@ -47,6 +47,7 @@ let statusbar: StatusBarSprite = null
 let ammo = 0
 let badguy: Sprite = null
 let Glock_19: Sprite = null
+game.splash("Boss fight!!", "B to reload and A to shoot")
 info.startCountdown(120)
 scene.setBackgroundImage(assets.image`bg`)
 info.setScore(16)
