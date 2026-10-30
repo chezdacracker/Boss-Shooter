@@ -16,16 +16,21 @@ controller.B.onEvent(ControllerButtonEvent.Pressed, function () {
     statusbar.value = 10
 })
 controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
-    if (ammo > 0) {
-        Glock_19.setImage(assets.image`Glock 19 Fired Update`)
-        music.play(music.createSong(assets.song`Glock Sound`), music.PlaybackMode.InBackground)
-        ammo += -1
-        info.changeScoreBy(-1)
-        bullet = sprites.createProjectileFromSprite(assets.image`bullet`, Glock_19, 500, 0)
-        bullet.scale = 0.5
-        pause(50)
-        Glock_19.setImage(assets.image`Glock 19 Update`)
+    if (statusbar2.value >= 0) {
+        if (ammo > 0) {
+            Glock_19.setImage(assets.image`Glock 19 Fired Update`)
+            music.play(music.createSong(assets.song`Glock Sound`), music.PlaybackMode.InBackground)
+            ammo += -1
+            info.changeScoreBy(-1)
+            bullet = sprites.createProjectileFromSprite(assets.image`bullet`, Glock_19, 500, 0)
+            bullet.scale = 0.5
+            pause(50)
+            Glock_19.setImage(assets.image`Glock 19 Update`)
+        }
     }
+})
+info.onCountdownEnd(function () {
+    game.gameOver(false)
 })
 statusbars.onZero(StatusBarKind.Health, function (status) {
     statusbar2.setBarSize(0, 0)

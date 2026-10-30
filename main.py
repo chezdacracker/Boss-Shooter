@@ -19,34 +19,31 @@ controller.B.on_event(ControllerButtonEvent.PRESSED, on_b_pressed)
 
 def on_a_pressed():
     global ammo, bullet
-    if ammo > 0:
-        Glock_19.set_image(assets.image("""
-            Glock 19 Fired Update
-            """))
-        music.play(music.create_song(assets.song("""
-                Glock Sound
-                """)),
-            music.PlaybackMode.IN_BACKGROUND)
-        ammo += -1
-        info.change_score_by(-1)
-        bullet = sprites.create_projectile_from_sprite(assets.image("""
-            bullet
-            """), Glock_19, 500, 0)
-        bullet.scale = 0.5
-        pause(50)
-        Glock_19.set_image(assets.image("""
-            Glock 19 Update
-            """))
+    if statusbar2.value >= 0:
+        if ammo > 0:
+            Glock_19.set_image(assets.image("""
+                Glock 19 Fired Update
+                """))
+            music.play(music.create_song(assets.song("""
+                    Glock Sound
+                    """)),
+                music.PlaybackMode.IN_BACKGROUND)
+            ammo += -1
+            info.change_score_by(-1)
+            bullet = sprites.create_projectile_from_sprite(assets.image("""
+                bullet
+                """), Glock_19, 500, 0)
+            bullet.scale = 0.5
+            pause(50)
+            Glock_19.set_image(assets.image("""
+                Glock 19 Update
+                """))
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
 
 def on_on_zero(status):
     statusbar2.set_bar_size(0, 0)
     sprites.destroy(badguy)
-    pause(500)
-    if game.ask("Do you want to continue?"):
-        pass
-    else:
-        game.game_over(True)
+    game.game_over(True)
 statusbars.on_zero(StatusBarKind.health, on_on_zero)
 
 def on_on_overlap(sprite, otherSprite):
@@ -60,7 +57,7 @@ statusbar: StatusBarSprite = None
 ammo = 0
 badguy: Sprite = None
 Glock_19: Sprite = None
-info.start_countdown(300)
+info.start_countdown(120)
 scene.set_background_image(assets.image("""
     bg
     """))
