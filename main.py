@@ -38,7 +38,16 @@ def on_a_pressed():
             Glock_19.set_image(assets.image("""
                 Glock 19 Update
                 """))
+        else:
+            music.play(music.create_song(assets.song("""
+                    No bullets
+                    """)),
+                music.PlaybackMode.IN_BACKGROUND)
 controller.A.on_event(ControllerButtonEvent.PRESSED, on_a_pressed)
+
+def on_countdown_end():
+    game.game_over(False)
+info.on_countdown_end(on_countdown_end)
 
 def on_on_zero(status):
     statusbar2.set_bar_size(0, 0)
@@ -57,6 +66,7 @@ statusbar: StatusBarSprite = None
 ammo = 0
 badguy: Sprite = None
 Glock_19: Sprite = None
+game.splash("Boss fight!!", "B to reload and A to shoot")
 info.start_countdown(120)
 scene.set_background_image(assets.image("""
     bg
@@ -96,3 +106,39 @@ statusbar2.y = 15
 def on_update_interval():
     badguy.set_velocity(0, randint(randint(-100, -50), randint(100, 50)))
 game.on_update_interval(400, on_update_interval)
+
+def on_forever():
+    if True:
+        if True:
+            if True:
+                if True:
+                    if True:
+                        if True:
+                            if True:
+                                if True:
+                                    if True:
+                                        if True:
+                                            if True:
+                                                if True:
+                                                    if True:
+                                                        if True:
+                                                            if True:
+                                                                if True:
+                                                                    if True:
+                                                                        if True:
+                                                                            if True:
+                                                                                if True:
+                                                                                    if True:
+                                                                                        if True:
+                                                                                            if True:
+                                                                                                if True:
+                                                                                                    if True:
+                                                                                                        if True:
+                                                                                                            if True:
+                                                                                                                if True:
+                                                                                                                    if True:
+                                                                                                                        if True:
+                                                                                                                            if True:
+                                                                                                                                if True:
+                                                                                                                                    pass
+forever(on_forever)

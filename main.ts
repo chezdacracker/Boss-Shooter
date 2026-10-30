@@ -26,6 +26,8 @@ controller.A.onEvent(ControllerButtonEvent.Pressed, function () {
             bullet.scale = 0.5
             pause(50)
             Glock_19.setImage(assets.image`Glock 19 Update`)
+        } else {
+            music.play(music.createSong(assets.song`No bullets`), music.PlaybackMode.InBackground)
         }
     }
 })
@@ -35,9 +37,19 @@ info.onCountdownEnd(function () {
 statusbars.onZero(StatusBarKind.Health, function (status) {
     statusbar2.setBarSize(0, 0)
     sprites.destroy(badguy)
-    game.gameOver(true)
+    pause(500)
+    if (game.ask("Do you want to continue?")) {
+        statusbar2 = statusbars.create(60, 8, StatusBarKind.Health)
+        statusbar2.positionDirection(CollisionDirection.Top)
+        statusbar2.max = 100
+        statusbar2.value = 100
+        statusbar2.y = 15
+    } else {
+        game.gameOver(true)
+    }
 })
 sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    music.play(music.createSong(assets.song`hit`), music.PlaybackMode.InBackground)
     sprites.destroy(bullet)
     statusbar2.value += -1
 })
